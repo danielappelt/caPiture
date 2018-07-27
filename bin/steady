@@ -1,0 +1,7 @@
+# light up LED on pin 18 if JACK is available
+sudo echo "18" > /sys/class/gpio/export
+sleep 1
+sudo echo "out" > /sys/class/gpio/gpio18/direction
+
+UP="$(ps aux | grep jackd | wc -l)"
+sudo echo "$[UP - 1]" > /sys/class/gpio/gpio18/value

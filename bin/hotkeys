@@ -1,0 +1,25 @@
+#!/bin/bash
+
+sudo echo "3" > /sys/class/gpio/export
+sudo echo "4" > /sys/class/gpio/export
+
+sleep 1
+sudo echo "in" > /sys/class/gpio/gpio3/direction
+sudo echo "in" > /sys/class/gpio/gpio4/direction
+
+while [ : ]
+do
+    BTN1=$(cat /sys/class/gpio/gpio3/value)$(cat /sys/class/gpio/gpio4/value)
+    sleep 0.5
+    BTN2=$(cat /sys/class/gpio/gpio3/value)$(cat /sys/class/gpio/gpio4/value)
+
+    if [ $BTN1 != $BTN2 ]; then continue; fi
+
+    if [ $BTN1 = "10" ]; then
+       rec &
+    fi
+    if [ $BTN1 = "01" ]; then del_last; fi
+    if [ $BTN1 = "11" ]; then sudo poweroff; fi
+
+    sleep 0.5
+done

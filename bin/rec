@@ -1,0 +1,21 @@
+#!/bin/bash
+
+IS_RECORDING=$(ps aux | grep jack_capture | wc -l)
+
+if [ $IS_RECORDING = 2 ]; then
+    # Stop running recording
+    pkill -SIGTERM jack_capture
+else
+    # Start recording and blinking
+    blink &
+    BLINK_PID=$!
+
+    FILE=$(date +%s).wav
+    jack_capture -fn $FILE -d 480 -p system:capture_*
+
+    #cp $filename /media/usb0/
+
+    kill $BLINK_PID
+    steady &
+fi
+

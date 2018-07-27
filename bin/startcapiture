@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Start listening for buttons on pin 3 and 4
+hotkeys &
+
+# Add a fake X session
+echo "DISPLAY=:0" > "$HOME/bin/setsession"
+dbus-launch >> "$HOME/bin/setsession"
+chmod +x "$HOME/bin/setsession"
+. "$HOME/bin/setsession"
+
+export DISPLAY
+export DBUS_SESSION_BUS_ADDRESS
+export DBUS_SESSION_BUS_PID
+
+# Start JACK server
+jackd -dalsa -dhw:X18XR18 -r44100 -p2048 -n3 &
+
+# Light up LED on pin 18 if JACK is available
+jack_wait -w
+steady &
+

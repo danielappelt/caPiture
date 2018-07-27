@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cd $HOME
+
+ls *.wav &> /dev/null
+if [ $? = 0 ]; then
+    rm $(ls -t *.wav | head -n 1)
+    
+    sudo echo "0" > /sys/class/gpio/gpio18/value
+    sleep 0.25
+    sudo echo "1" > /sys/class/gpio/gpio18/value
+    sleep 0.25
+    sudo echo "0" > /sys/class/gpio/gpio18/value
+    sleep 0.25
+    sudo echo "1" > /sys/class/gpio/gpio18/value
+    steady & 
+fi
