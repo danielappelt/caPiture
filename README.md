@@ -1,14 +1,14 @@
 # caPiture
 Headless multitrack audio recording for your Raspberry Pi.
 
-capPiture uses [jack_capture](https://github.com/kmatheussen/jack_capture) to headlessly multitrack record the input of the [Behringer XR18 Mixer](http://www.musictribe.com/Categories/Behringer/Mixers/Digital/XR18/p/P0BI8). For now, it is hardcoded to work with the XR18. If you want to use it with another audio interface, please modify the startcapiture script accordingly.
+capPiture uses [jack_capture](https://github.com/kmatheussen/jack_capture) to headlessly multitrack record the input of the [Behringer XR18 Mixer](http://www.musictribe.com/Categories/Behringer/Mixers/Digital/XR18/p/P0BI8). For now, it is hardcoded to work with the XR18. If you want to use it with another audio interface, please modify the [startcapiture script](https://github.com/danielappelt/caPiture/blob/5838da6bf123259d0c4eefd611a68dba7fbfd34e/bin/startcapiture#L17) accordingly.
 
 From another computer
 - Download the latest version of [Raspbian Lite](https://raspberrypi.org/downloads/raspbian) and install it to an SD card (bigger is better). For Linux users, the command is:
 ```bash
 sudo dd bs=4M if=nameoftheimage of=/dev/yoursdcard status=progress conv=fsync
 ```
-- Once the image is on the SD card, copy the bin folder containing the caPiture scripts to /home/pi/
+- Once the image is on the SD card, copy the [bin folder](https://github.com/danielappelt/caPiture/tree/master/bin) containing the caPiture scripts to /home/pi/
 
 On the Raspberry Pi
 - In raspi-config set the Rpi to autologin in console mode
