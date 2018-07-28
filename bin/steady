@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # light up LED on pin 18 if JACK is available
 sudo echo "18" > /sys/class/gpio/export
 sleep 1
